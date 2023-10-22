@@ -1,7 +1,3 @@
-#ifndef STRUCT_ARBOL_VIDA_H
-#define STRUCT_ARBOL_VIDA_H
-
-#include "StructHumano.h"
 #include "StructMundo.h"
 
 struct ArbolVida;
@@ -69,7 +65,7 @@ struct ArbolVida{
 
 };
 
-Nodo *ArrMundoToArbol(StructHumano *humanos[],int inicio, int final, int profundidadActual = 0, int nivel){
+Nodo *ArrMundoToArbol(StructHumano *humanos[],int inicio, int final, int profundidadActual, int nivel){
     if(inicio > final)
         return nullptr;
     int medio = (inicio + final)/2;
@@ -91,6 +87,3 @@ ArbolVida* generarArbol(StructMundo * mundo){
     return arbol;
 }
 
-
-
-#endif // STRUCT_ARBOL_VIDA_H

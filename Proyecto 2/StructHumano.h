@@ -9,6 +9,19 @@
 
 using namespace std;
 
+string addPadding(string input, int targetSize, char paddingChar) {
+    if (input.length() >= targetSize) {
+        return input;
+    }
+
+    string result = input;
+    while (result.length() < targetSize) {
+        result += paddingChar;
+    }
+
+    return result;
+}
+
 void cargarNombres(string nombres[]){
     ifstream archivo("Nombres.txt");
     string linea;
@@ -125,13 +138,13 @@ struct StructPecado{
     }
 
     void imprimir(){
-        cout << "Nombre: " << nombre << "\tCantidad: " << cantidad << endl;
+        cout << "Pecado: " << nombre << "\tCantidad: " << cantidad << endl;
     }
     
 };
 
 struct StructHumano{
-    int id;
+    int id,cantAmigos,amigosEncontrados;
     string nombre,apellido,pais,creencia,profesion,nacimiento;
     StructPecado * pecados[7];
     string pecado[7];
@@ -142,10 +155,11 @@ struct StructHumano{
 
     StructHumano(){
          nombre = apellido = pais = creencia = profesion = nacimiento = "";
-         id = 0;
+         id = cantAmigos = amigosEncontrados = 0;
     }
 
     StructHumano(int _id,string _nombre,string _apellido,string _pais,string _creencia,string _profesion, string _nacimiento){
+        cantAmigos = amigosEncontrados = 0;
         id = _id;
         nombre = _nombre;
         apellido = _apellido;
@@ -157,14 +171,26 @@ struct StructHumano{
         cargarRedes(red);
         for (int i = 0; i < 7; i++){
             pecados[i] = new StructPecado(pecado[i]);
-            redesSociales[i] = new StructRedSocial(red[i]);
+            redesSociales[i] = new StructRedSocial(red[i],numRandom(100));
         }
     }
 
     void imprimir(){
-        cout << "ID: " << to_string(id) << "\tNombre: " << nombre << "\tApellido: " << apellido << "\tPais: " << 
-        pais << "\tCreencia: " << creencia << "\tProfesion: " << profesion << "\tNacimiento: " << nacimiento << endl;
+        cout << "ID: " << to_string(id) << "\tNombre: " <<addPadding(nombre,1, ' ') << " " << addPadding(apellido,10, ' ') << "\tPais: " << 
+        addPadding(pais,10, ' ') << "\tCreencia: " << addPadding(creencia,10, ' ') << "\tProfesion: " << addPadding(profesion,10, ' ') << "\tNacimiento: " << nacimiento << endl << "Amigos:\n";
+        for (int i = 0; i < amigosEncontrados; i++){
+            amigos[i]->imprimir2();
+        }
+        cout << "\nPecados:\n";
+        for (int i = 0; i < 7; i++){
+            pecados[i]->imprimir();
+        }
+        
+        cout << "-----------------------------------------------------------------------------" << endl;
     }
 
-
+    void imprimir2(){
+        cout << "\tID: " << to_string(id) << "\tNombre: " << addPadding(nombre,1, ' ') << " " << addPadding(apellido,10, ' ') << "Pais: " << 
+        addPadding(pais,10, ' ') << "Creencia: " << addPadding(creencia,10, ' ') << "Profesion: " << addPadding(profesion,10, ' ') << "Nacimiento: " << nacimiento << endl;
+    }
 };

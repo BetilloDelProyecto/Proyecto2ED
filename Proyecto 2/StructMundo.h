@@ -19,11 +19,22 @@ struct StructMundo{
     }
 
     void generarPoblacion(int cant){
+        int repeticiones = 0;
         for (int i = cantPoblacion; i < cant+cantPoblacion; i++){
-            poblacion[i] = new StructHumano(numRandom(999999),nombres[numRandom(999)],apellidos[numRandom(14)],paises[numRandom(19)],creencias[numRandom(9)],profesiones[numRandom(19)],getDateTime());
+            int id = numRandom(999999);
+            if(!(existeID(id))){
+                poblacion[i] = new StructHumano(id,nombres[numRandom(999)],apellidos[numRandom(14)],paises[numRandom(19)],creencias[numRandom(9)],profesiones[numRandom(19)],getDateTime());
+                poblacion[i]->cantAmigos = numRandom(100);
+            }else{
+                repeticiones += 1;
+                cant += 1; 
+            }
+            
         }
         cantPoblacion += cant;
+        cantPoblacion -= repeticiones;
         ordenarPoblacion();
+        buscarAmigos();
     }
 
     void imprimir(){
@@ -42,6 +53,33 @@ struct StructMundo{
                 }
             } 
         }  
+    }
+
+    bool existeID(int id){
+        for (int i = 0; i < cantPoblacion; i++){
+            if(poblacion[i]->id == id){
+                return true;
+            }  
+        }  
+        return false;
+    }
+
+    void buscarAmigos(){
+        for (int i = 0; i < cantPoblacion; i++){
+            StructHumano * humano = poblacion[i];
+            for (int j = 0; j < cantPoblacion ; j++){
+                StructHumano * amigo = poblacion[j];
+                if(amigo->id != humano->id){
+                    if(amigo->pais == humano->pais && (amigo->creencia == humano->creencia || amigo->profesion == humano->profesion || amigo->apellido == humano->apellido)){
+                        if (humano->amigosEncontrados < humano->cantAmigos){
+                            humano->amigos[humano->amigosEncontrados] = amigo;
+                            humano->amigosEncontrados += 1;
+                        }
+                    }   
+                }else
+                    continue;
+            }
+        }
     }
 };
 
