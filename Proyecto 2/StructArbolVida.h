@@ -1,17 +1,14 @@
+#ifndef STRUCT_ARBOL_VIDA_H
+#define STRUCT_ARBOL_VIDA_H
+
 #include "StructMundo.h"
+#include <cmath>
 
 struct ArbolVida;
 struct Nodo;
-
-int calcularNivel(int CantidadHumanos){
-    int onePercent = CantidadHumanos/100;
-    int nodos, nivel = 0;
-    while(nodos < onePercent){
-        nodos = 2^nivel - 1;
-        nivel++;
-    }
-    return nivel;
-}
+int calcularNivel(int CantidadHumanos);
+Nodo *ArrMundoToArbol(StructHumano *humanos[],int inicio, int final, int profundidadActual, int nivel);
+ArbolVida* generarArbol(StructMundo * mundo);
 
 struct Nodo{
     StructHumano *humano;
@@ -52,6 +49,14 @@ struct ArbolVida{
             return esta(id, nodo->der);
     }
 
+    void inOrder(Nodo* nodo) {
+        if (nodo != nullptr) {
+            inOrder(nodo->izq);
+            std::cout << nodo->humano->id << " ";
+            inOrder(nodo->der);
+        }
+    }
+
     //Insertar un humano en el arbol
     void insertar(StructHumano * humano, Nodo * nodo){
         if(nodo == nullptr)
@@ -65,6 +70,17 @@ struct ArbolVida{
 
 };
 
+int calcularNivel(int CantidadHumanos){
+    int onePercent = CantidadHumanos/100;
+    int nodes = 0;
+    int nivel = 0;
+    while(nodes < onePercent){
+        nodes += pow(2,nivel+1) - 1;
+        nivel++;
+    }
+    return nivel;
+}
+
 Nodo *ArrMundoToArbol(StructHumano *humanos[],int inicio, int final, int profundidadActual, int nivel){
     if(inicio > final)
         return nullptr;
@@ -76,14 +92,16 @@ Nodo *ArrMundoToArbol(StructHumano *humanos[],int inicio, int final, int profund
         root->der = ArrMundoToArbol(humanos, medio+1, final, profundidadActual+1, nivel);
     }
     return root;
-    
 }
 
 ArbolVida* generarArbol(StructMundo * mundo){
-    ArbolVida * arbol = new ArbolVida();
-    int nodos = calcularNivel(mundo->cantPoblacion);
-    Nodo * raiz = ArrMundoToArbol(mundo->poblacion, 0, mundo->cantPoblacion-1, 0, nodos);
+    auto * arbol = new ArbolVida();
+    int nivel = calcularNivel(mundo->cantPoblacion);
+    Nodo * raiz = ArrMundoToArbol(mundo->poblacion, 0, mundo->cantPoblacion-1, 0, nivel);
     arbol->raiz = raiz;
     return arbol;
 }
 
+
+
+#endif // STRUCT_ARBOL_VIDA_H
