@@ -20,9 +20,28 @@ struct StructMundo{
 
     void generarPoblacion(int cant){
         for (int i = cantPoblacion; i < cant+cantPoblacion; i++){
-            poblacion[i] = new StructHumano(nombres[numRandom(999)],apellidos[numRandom(14)],paises[numRandom(19)],creencias[numRandom(9)],profesiones[numRandom(19)],getDateTime());
+            poblacion[i] = new StructHumano(numRandom(999999),nombres[numRandom(999)],apellidos[numRandom(14)],paises[numRandom(19)],creencias[numRandom(9)],profesiones[numRandom(19)],getDateTime());
         }
         cantPoblacion += cant;
+        ordenarPoblacion();
+    }
+
+    void imprimir(){
+        for (int i = 0; i < cantPoblacion; i++)
+            poblacion[i]->imprimir();
+    }
+
+    void ordenarPoblacion(){
+        for (int i = 0; i < cantPoblacion; i++){
+            for (int j = 0; j < cantPoblacion-1; j++){
+                if(poblacion[j]->id > poblacion[j+1]->id){
+                    StructHumano * h1 = poblacion[j];
+                    StructHumano * h2 = poblacion[j+1];
+                    poblacion[j] = h2;
+                    poblacion[j+1] = h1;
+                }
+            } 
+        }  
     }
 };
 

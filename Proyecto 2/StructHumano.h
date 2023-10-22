@@ -145,7 +145,8 @@ struct StructHumano{
          id = 0;
     }
 
-    StructHumano(string _nombre,string _apellido,string _pais,string _creencia,string _profesion, string _nacimiento){
+    StructHumano(int _id,string _nombre,string _apellido,string _pais,string _creencia,string _profesion, string _nacimiento){
+        id = _id;
         nombre = _nombre;
         apellido = _apellido;
         pais = _pais;
@@ -161,7 +162,7 @@ struct StructHumano{
     }
 
     void imprimir(){
-        cout << "Nombre: " << nombre << "\tApellido: " << apellido << "\tPais: " << 
+        cout << "ID: " << to_string(id) << "\tNombre: " << nombre << "\tApellido: " << apellido << "\tPais: " << 
         pais << "\tCreencia: " << creencia << "\tProfesion: " << profesion << "\tNacimiento: " << nacimiento << endl;
     }
 
