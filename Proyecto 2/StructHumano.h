@@ -1,3 +1,6 @@
+#ifndef STRUCT_HUMANO_H
+#define STRUCT_HUMANO_H
+
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -194,3 +197,5 @@ struct StructHumano{
         addPadding(pais,10, ' ') << "Creencia: " << addPadding(creencia,10, ' ') << "Profesion: " << addPadding(profesion,10, ' ') << "Nacimiento: " << nacimiento << endl;
     }
 };
+
+#endif // STRUCT_HUMANO_H
