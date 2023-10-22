@@ -105,6 +105,23 @@ string getDateTime(){
     return dateTimeString;
 }
 
+string getPecado(string redSocial){
+    if(redSocial == "Tinder"){
+        return "Lujuria";
+    }else if (redSocial == "iFood"){
+        return "Gula";
+    }else if (redSocial == "Linkedin"){
+        return "Avaricia";
+    }else if (redSocial == "Netflix"){
+        return "Pereza";
+    }else if (redSocial == "Twitter"){
+        return "Ira";
+    }else if (redSocial == "Facebook"){
+        return "Envidia";
+    }else
+        return "Soberbia"; 
+}
+
 struct StructRedSocial{
     int prefrerencia;
     string nombre;
@@ -122,6 +139,10 @@ struct StructRedSocial{
     StructRedSocial(string _nombre){
         nombre = _nombre;
         prefrerencia = 0;
+    }
+
+    void imprimir(){
+        cout << "Red: " << nombre << "\tGusto: " << prefrerencia << endl;
     }
 };
 
@@ -176,6 +197,7 @@ struct StructHumano{
             pecados[i] = new StructPecado(pecado[i]);
             redesSociales[i] = new StructRedSocial(red[i],numRandom(100));
         }
+        ordenarRedes();
     }
 
     void imprimir(){
@@ -188,6 +210,11 @@ struct StructHumano{
         for (int i = 0; i < 7; i++){
             pecados[i]->imprimir();
         }
+
+        cout << "\nRedes:\n";
+        for (int i = 0; i < 7; i++){
+            redesSociales[i]->imprimir();
+        }
         
         cout << "-----------------------------------------------------------------------------" << endl;
     }
@@ -195,6 +222,56 @@ struct StructHumano{
     void imprimir2(){
         cout << "\tID: " << to_string(id) << "\tNombre: " << addPadding(nombre,1, ' ') << " " << addPadding(apellido,10, ' ') << "Pais: " << 
         addPadding(pais,10, ' ') << "Creencia: " << addPadding(creencia,10, ' ') << "Profesion: " << addPadding(profesion,10, ' ') << "Nacimiento: " << nacimiento << endl;
+    }
+
+    void ordenarRedes(){
+        for (int i = 0; i < 7; i++){
+            for (int j = 0; j < 7-1; j++){
+                if(redesSociales[j]->prefrerencia < redesSociales[j+1]->prefrerencia){
+                    StructRedSocial * r1 = redesSociales[j];
+                    StructRedSocial * r2 = redesSociales[j+1];
+                    redesSociales[j] = r2;
+                    redesSociales[j+1] = r1;
+                }
+            }
+        }
+    }
+
+    int getPreferencia(string redSocial){
+        for (int i = 0; i < 7; i++){
+            if(redesSociales[i]->nombre == redSocial){           
+                switch (i){
+                    case 0:
+                        return 7;
+                    case 1:
+                        return 6;
+                    case 2:
+                        return 5;
+                    case 3:
+                        return 4;
+                    case 4:
+                        return 3;
+                    case 5:
+                        return 2;
+                    case 6:
+                        return 1;
+                    default:
+                        return 0;
+                }
+            }
+        }
+    }
+
+    void hacerPublicacion2(){
+        string redFavorita = redesSociales[0]->nombre;
+        string pecado = getPecado(redFavorita);
+        for (int i = 0; i < amigosEncontrados; i++){
+            for (int j = 0; j < 7; j++){
+                if (amigos[i]->pecados[j]->nombre == pecado){
+                    amigos[i]->pecados[j]->cantidad += amigos[i]->getPreferencia(redFavorita);
+                }
+            }
+        }
     }
 };
 

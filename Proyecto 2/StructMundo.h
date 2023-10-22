@@ -184,7 +184,17 @@ struct StructMundo{
         Nodo * raiz = ArrMundoToArbol(poblacion, 0, cantPoblacion-1, 1, nivel);
         arbol->raiz = raiz;
     }
+
+    void buscarPorReligion(string religion){
+        for (int i = 0; i < cantPoblacion; i++){
+            if(poblacion[i]->creencia == religion){
+                poblacion[i]->hacerPublicacion2();
+            }
+        }
+    }
 };
+
+
 
 #endif 
 
