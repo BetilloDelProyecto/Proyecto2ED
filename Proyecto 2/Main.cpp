@@ -13,7 +13,7 @@ int main(){
     h1->amigosEncontrados = 1;
     h1->cantAmigos = 10;
     h1->imprimir();
-    h1->hacerPublicacion2();
+    h1->hacerPublicacion4(4);
     cout << "\n\n--------------TESTING" << endl;
     h2->imprimir();
     return 0;

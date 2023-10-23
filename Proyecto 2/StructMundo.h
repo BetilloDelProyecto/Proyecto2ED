@@ -192,6 +192,22 @@ struct StructMundo{
             }
         }
     }
+
+    void buscarPorProfesion(string profesion,int cantRedes){
+        for (int i = 0; i < cantPoblacion; i++){
+            if(poblacion[i]->profesion == profesion){
+                poblacion[i]->hacerPublicacion3(cantRedes);
+            }
+        } 
+    }
+
+    void buscarPorFamilia(string pais,string apellido,int cantRedes){
+        for (int i = 0; i < cantPoblacion; i++){
+            if(poblacion[i]->pais == pais && poblacion[i]->apellido == apellido){
+                poblacion[i]->hacerPublicacion3(cantRedes);
+            }
+        } 
+    }
 };
 
 

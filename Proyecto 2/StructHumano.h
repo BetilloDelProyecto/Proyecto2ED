@@ -273,6 +273,38 @@ struct StructHumano{
             }
         }
     }
+
+    void hacerPublicacion3(int cantRedes){
+        cout << endl;
+        for (int i = 0; i < amigosEncontrados; i++){
+            for (int j = 0; j < cantRedes ; j++){
+                string red = redesSociales[j]->nombre;
+                string pecado = getPecado(red);
+                for (int k = 0; k < 7; k++){
+                    if (amigos[i]->pecados[k]->nombre == pecado){
+                        amigos[i]->pecados[k]->cantidad += amigos[i]->getPreferencia(red);
+                    }
+                } 
+            }
+        }
+    }
+
+    void hacerPublicacion4(int cantRedes){
+        cout << endl;
+        for (int i = 0; i < amigosEncontrados; i++){
+            for (int j = 0; j < cantRedes ; j++){
+                string red = redesSociales[j]->nombre;
+                string pecado = getPecado(red);
+                for (int k = 0; k < 7; k++){
+                    if (amigos[i]->pecados[k]->nombre == pecado){
+                        amigos[i]->pecados[k]->cantidad += amigos[i]->getPreferencia(red);
+                    }
+                } 
+            }
+        }
+    }
+
+
 };
 
 #endif // STRUCT_HUMANO_H
