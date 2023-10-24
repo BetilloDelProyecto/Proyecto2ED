@@ -262,6 +262,16 @@ struct StructHumano{
         }
     }
 
+    void hacerPublicacion1(const string& _red){
+        for(int i = 0; i < amigosEncontrados; i++){
+            for(int j = 0; j < 7; j++){
+                if(amigos[i]->pecados[j]->nombre == _red){
+                    amigos[i]->pecados[j]->cantidad += amigos[i]->getPreferencia(_red);
+                }
+            }
+        }
+    }
+
     void hacerPublicacion2(){
         string redFavorita = redesSociales[0]->nombre;
         string pecado = getPecado(redFavorita);

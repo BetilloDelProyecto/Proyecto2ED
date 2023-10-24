@@ -231,6 +231,7 @@ struct StructMundo{
             return buscar(id, nodo->der, nivelAlcanzar, nivelActual+1);
     }
 
+    //FALTA OPTIMIZAR COMPLEJIDAD O^CANTIDADHUMANOS - CANTIDADHUMANOS[INDEX]
     StructHumano * buscarEnArray(int _id, StructHumano ** ptHumano){
         if(_id < (*ptHumano)->id){
             while(ptHumano != nullptr){
@@ -248,6 +249,16 @@ struct StructMundo{
             }
         }
         return nullptr;
+    }
+
+    //Hacer publicacion dado un id y una red social
+    void publicar1(int id, string red){
+        StructHumano * humano = buscar(id, arbol->raiz, arbol->altura(arbol->raiz), 1);
+        if(humano != nullptr){
+            humano->hacerPublicacion1(red);
+        }else{
+            cout << "No se encontro el humano" << endl;
+        }
     }
 };
 
