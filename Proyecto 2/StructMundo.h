@@ -11,11 +11,11 @@ Nodo *ArrMundoToArbol(StructHumano *humanos[],int inicio, int final, int profund
 
 
 struct Nodo{
-    StructHumano *humano;
+    StructHumano **humano;
     Nodo *izq;
     Nodo *der;
 
-    Nodo(StructHumano * _humano){
+    Nodo(StructHumano ** _humano){
         this->humano = _humano;
         izq = nullptr;
         der = nullptr;
@@ -41,9 +41,9 @@ struct ArbolVida{
     bool esta(int id, Nodo * nodo){
         if(nodo == nullptr)
             return false;
-        else if(nodo->humano->id == id)
+        else if((*(nodo->humano))->id == id)
             return true;
-        else if(id < nodo->humano->id)
+        else if(id < (*(nodo->humano))->id)
             return esta(id, nodo->izq);
         else
             return esta(id, nodo->der);
@@ -52,16 +52,25 @@ struct ArbolVida{
     void inOrder(Nodo* nodo) {
         if (nodo != nullptr) {
             inOrder(nodo->izq);
-            std::cout << nodo->humano->id << " ";
+            std::cout << (*(nodo->humano))->id << " ";
             inOrder(nodo->der);
         }
     }
 
+    
+
+    int altura(Nodo * nodo){
+        if(nodo == nullptr)
+            return 0;
+        else
+            return 1 + max(altura(nodo->izq), altura(nodo->der));
+    }
+
     //Insertar un humano en el arbol
-    void insertar(StructHumano * humano, Nodo * nodo){
+    void insertar(StructHumano ** humano, Nodo * nodo){
         if(nodo == nullptr)
             nodo = new Nodo(humano);
-        else if(humano->id < nodo->humano->id)
+        else if((*humano)->id < (*nodo->humano)->id)
             insertar(humano, nodo->izq);
         else
             insertar(humano, nodo->der);
@@ -85,7 +94,7 @@ Nodo *ArrMundoToArbol(StructHumano *humanos[],int inicio, int final, int profund
     if(inicio > final)
         return nullptr;
     int medio = (inicio + final)/2;
-    Nodo *root = new Nodo(humanos[medio]);
+    Nodo *root = new Nodo(&(humanos[medio]));
 
     if(profundidadActual < nivel){
         root->izq = ArrMundoToArbol(humanos, inicio, medio-1, profundidadActual+1, nivel);
@@ -207,6 +216,38 @@ struct StructMundo{
                 poblacion[i]->hacerPublicacion3(cantRedes);
             }
         } 
+    }
+
+    StructHumano * buscar(int id, Nodo * nodo, int nivelAlcanzar, int nivelActual ){
+        if(nodo == nullptr)
+            return nullptr;
+        else if((*(nodo->humano))->id == id)
+            return *nodo->humano;
+        else if(nivelActual >= nivelAlcanzar)
+            return buscarEnArray(id, nodo->humano);
+        else if(id < (*nodo->humano)->id)
+            return buscar(id, nodo->izq, nivelAlcanzar, nivelActual+1);
+        else
+            return buscar(id, nodo->der, nivelAlcanzar, nivelActual+1);
+    }
+
+    StructHumano * buscarEnArray(int _id, StructHumano ** ptHumano){
+        if(_id < (*ptHumano)->id){
+            while(ptHumano != nullptr){
+            ptHumano = ptHumano - 1;
+                if((*ptHumano)->id == _id)
+                    return *ptHumano;
+            }
+        }else{
+            if(_id > (*ptHumano)->id){
+                while(ptHumano != nullptr){
+                    ptHumano = ptHumano + 1;
+                    if((*ptHumano)->id == _id)
+                        return *ptHumano;
+                }
+            }
+        }
+        return nullptr;
     }
 };
 
