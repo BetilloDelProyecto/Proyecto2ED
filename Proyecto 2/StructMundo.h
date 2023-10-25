@@ -144,6 +144,7 @@ struct StructMundo{
         cantPoblacion -= repeticiones;
         ordenarPoblacion();
         buscarAmigos();
+        generarArbol();
     }
 
     void imprimir(){

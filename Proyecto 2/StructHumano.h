@@ -175,6 +175,9 @@ struct StructHumano{
     string red[7];
     StructHumano * amigos[100];
     StructRedSocial * redesSociales[7];
+    bool vivo;
+    bool condenado;
+    bool salvado;
 
 
     StructHumano(){
@@ -191,6 +194,9 @@ struct StructHumano{
         creencia = _creencia;
         profesion = _profesion;
         nacimiento = _nacimiento;
+        vivo = true;
+        condenado = false;
+        salvado = false;
         cargarPecados(pecado);
         cargarRedes(red);
         for (int i = 0; i < 7; i++){
@@ -320,6 +326,14 @@ struct StructHumano{
             res += pecados[i]->cantidad;
         }  
         return res;
+    }
+
+    int getCantidadPecado(string _pecado){
+        for (int i = 0; i < 7; i++){
+            if(pecados[i]->nombre == _pecado){
+                return pecados[i]->cantidad;
+            }
+        }
     }
 
 

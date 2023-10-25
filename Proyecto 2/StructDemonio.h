@@ -1,14 +1,15 @@
 #ifndef STRUCT_DEMONIO_H
 #define STRUCT_DEMONIO_H
 
-#include "StructHumano.h"
 #include "StructFamilia.h"
+#include <algorithm>
+#include <iterator>
 
 
 struct Demonio{
     std::string nombre;
     std::string pecado;
-    Heap * familias[200];
+    Familia * familias[200];
     int cantidadFamilias;
 
     Demonio(std::string _nombre, std::string _pecado){
@@ -17,12 +18,73 @@ struct Demonio{
         cantidadFamilias = 0;
     }
 
-     void agregarFamilia(Heap * familia){
+     void agregarFamilia(Familia * familia){
         familias[cantidadFamilias] = familia;
         cantidadFamilias++;
     }
 
-    void condenar(){}
+    void agregarHumano(StructHumano * humano){
+        if(familias[0] == nullptr){
+            familias[0] = new Familia(humano->pais, humano->apellido);
+            familias[0]->insertar(humano);
+            cantidadFamilias++;
+        } else{
+            for(int i =0; i < cantidadFamilias; i++){
+                if(familias[i]->pais == humano->pais && familias[i]->apellido == humano->apellido){
+                    familias[i]->insertar(humano);
+                    break;
+                } else{
+                    if(i == cantidadFamilias-1){
+                        familias[cantidadFamilias] = new Familia(humano->pais, humano->apellido);
+                        familias[cantidadFamilias]->insertar(humano);
+                        cantidadFamilias++;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    void condenar(StructHumano * _poblacion, int cantPoblacion){
+        StructHumano * tmp[100000];
+        std::copy(_poblacion, _poblacion + cantPoblacion, tmp);
+        ordenarPorPecado(pecado, tmp, cantPoblacion);
+        int cantCondenador = cantPoblacion * 0.05;
+        for(int i = 0; i < cantCondenador; i++){
+            if(i == cantPoblacion-1 ){
+                break;
+            } else{
+                if(tmp[i]->condenado == true || tmp[i]->salvado == true){
+                    cantCondenador++;
+                } else{
+                    tmp[i]->condenado = true;
+                    tmp[i]->vivo = false;
+                    agregarHumano(tmp[i]);
+                }
+            }
+        }
+        free(tmp);
+    }
+
+    void ordenarPorPecado(std::string pecado, StructHumano * poblacion[], int cantPoblacion){
+        for (int i = 0; i < cantPoblacion; i++){
+            for (int j = 0; j < cantPoblacion-1; j++){
+                if(poblacion[j]->getCantidadPecado(pecado) > poblacion[j+1]->getCantidadPecado(pecado)){
+                    StructHumano * h1 = poblacion[j];
+                    StructHumano * h2 = poblacion[j+1];
+                    poblacion[j] = h2;
+                    poblacion[j+1] = h1;
+                }
+            } 
+        }  
+    }
+
+    void imprimirFamilias(){
+        for(int i = 0; i < cantidadFamilias; i++){
+            familias[i]->imprimir();
+        }
+    }
+
 };
 
 void cargarDemonios(Demonio *demonios[], int cantidadDemonios){

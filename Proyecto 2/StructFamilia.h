@@ -1,4 +1,12 @@
+#ifndef STRUCT_FAMILIA_H
+#define STRUCT_FAMILIA_H
+
 #include "StructMundo.h"
+
+
+struct Familia;
+struct Heap;
+
 
 struct Heap{
     StructHumano * array[10000];
@@ -52,16 +60,25 @@ struct Heap{
     }
 
     StructHumano * borrar(){
-        StructHumano * humano = array[index-1];
-        StructHumano * borrado = array[1];
-        array[index-1] = NULL;
-        if(index == 2){
-            array[1] = nullptr;
-        }
-        array[1] = humano;
-        index -= 1;
-        ordenar();
-        return borrado;
+        if(index != 1){
+            if(index == 2){
+                StructHumano * borrado = array[1];
+                array[1] = NULL;
+                index -=1;
+                return borrado;
+            }else{
+                StructHumano * humano = array[index-1];
+                StructHumano * borrado = array[1];
+                array[index-1] = NULL;
+                array[1] = humano;
+                index -= 2;
+                ordenar();
+                index += 1;
+                return borrado;
+            }
+
+        }else return NULL;
+
     }
 
     void imprimir(){
@@ -89,17 +106,24 @@ struct Familia{
     }
 
     void insertar(StructHumano * humano){
-        personas->insertar(humano);
+        if(personas != nullptr){
+            personas->insertar(humano);
+        }
     }
 
     StructHumano * borrar(){
-        return personas->borrar();
+        if(personas != nullptr){
+            return personas->borrar();
+        }
+        return nullptr;
     }
 
     void imprimir(){
         cout << "Familia " << apellido << " de " << pais << endl;
-        personas->imprimir();
+        if(personas != nullptr){
+            personas->imprimir();
+        }
     }
-
-
 };
+
+#endif // STRUCT_FAMILIA_H
