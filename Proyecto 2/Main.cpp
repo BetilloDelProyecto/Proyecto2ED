@@ -1,9 +1,12 @@
-#include "StructFamilia.h"
-
+#include "StructDemonio.h"
+#include "StructHumano.h"
+#include "StructMundo.h"
+#include <iostream>
 
 int main(){
     StructMundo * m1 = new StructMundo();
     m1->generarPoblacion(500);
+
 
     m1->buscarPorReligion("Cristianismo");
     m1->buscarPorReligion("Cristianismo");
@@ -16,10 +19,10 @@ int main(){
     m1->buscarPorReligion("Budismo");
 
 
+    m1->demonios[0]->condenar((m1->poblacion), m1->cantPoblacion);
+    m1->demonios[0]->imprimirFamilias();
 
 
-    //m1->arbol->inOrder(m1->arbol->raiz);
-    //cout << m1->poblacion[0]->id << endl;
 /*     if(m1->buscar(134123, m1->arbol->raiz,m1->arbol->altura(m1->arbol->raiz), 1) != nullptr){
         cout << "Encontrado" << endl;
     }

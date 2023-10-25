@@ -1,9 +1,10 @@
-#ifndef STRUCT_MUNDO_H
-#define STRUCT_MUNDO_H
-
 #include "StructHumano.h"
 #include <cmath>
 #include "StructDemonio.h"
+
+
+#ifndef STRUCT_MUNDO_H
+#define STRUCT_MUNDO_H
 
 struct ArbolVida;
 struct Nodo;
@@ -103,6 +104,8 @@ Nodo *ArrMundoToArbol(StructHumano *humanos[],int inicio, int final, int profund
     }
     return root;
 }
+
+struct Demonio;
 
 struct StructMundo{
     StructHumano * poblacion[100000];
