@@ -314,6 +314,14 @@ struct StructHumano{
         }
     }
 
+    int cantPecados(){
+        int res = 0;
+        for (int i = 0; i < 7; i++){
+            res += pecados[i]->cantidad;
+        }  
+        return res;
+    }
+
 
 };
 
