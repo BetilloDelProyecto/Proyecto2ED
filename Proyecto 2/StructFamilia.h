@@ -1,8 +1,8 @@
-#ifndef STRUCT_FAMILIA_H
-#define STRUCT_FAMILIA_H
-
 #include <iostream>
 #include "StructHumano.h"
+
+#ifndef STRUCT_FAMILIA_H
+#define STRUCT_FAMILIA_H
 
 struct Heap{
     StructHumano * array[10000];

@@ -7,12 +7,8 @@
 #include <sstream>
 #include <iomanip>
 
-
-
-
 #ifndef STRUCT_HUMANO_H
 #define STRUCT_HUMANO_H
-
 
 using namespace std;
 
@@ -30,7 +26,7 @@ string addPadding(string input, int targetSize, char paddingChar) {
 }
 
 void cargarNombres(string nombres[]){
-    ifstream archivo("C:\\Users\\Amerc\\Documents\\TEC\\ESTRUCTURA_DATOS\\Proyecto2ED\\Proyecto2ED\\Proyecto 2\\Nombres.txt");
+    ifstream archivo("Nombres.txt");
     string linea;
     int i = 0;
     while (getline(archivo,linea))
@@ -39,7 +35,7 @@ void cargarNombres(string nombres[]){
 }
 
 void cargarApellidos(string apellidos[]){
-    ifstream archivo("C:\\Users\\Amerc\\Documents\\TEC\\ESTRUCTURA_DATOS\\Proyecto2ED\\Proyecto2ED\\Proyecto 2\\Apellidos.txt");
+    ifstream archivo("Apellidos.txt");
     string linea;
     int i = 0;
     while (getline(archivo,linea))
@@ -48,7 +44,7 @@ void cargarApellidos(string apellidos[]){
 }
 
 void cargarProfesiones(string profesiones[]){
-    ifstream archivo("C:\\Users\\Amerc\\Documents\\TEC\\ESTRUCTURA_DATOS\\Proyecto2ED\\Proyecto2ED\\Proyecto 2\\Profesiones.txt");
+    ifstream archivo("Profesiones.txt");
     string linea;
     int i = 0;
     while (getline(archivo,linea))
@@ -57,7 +53,7 @@ void cargarProfesiones(string profesiones[]){
 }
 
 void cargarPaises(string paises[]){
-    ifstream archivo("C:\\Users\\Amerc\\Documents\\TEC\\ESTRUCTURA_DATOS\\Proyecto2ED\\Proyecto2ED\\Proyecto 2\\Paises.txt");
+    ifstream archivo("Paises.txt");
     string linea;
     int i = 0;
     while (getline(archivo,linea))
@@ -66,7 +62,7 @@ void cargarPaises(string paises[]){
 }
 
 void cargarCreencias(string creencias[]){
-    ifstream archivo("C:\\Users\\Amerc\\Documents\\TEC\\ESTRUCTURA_DATOS\\Proyecto2ED\\Proyecto2ED\\Proyecto 2\\Creencias.txt");
+    ifstream archivo("Creencias.txt");
     string linea;
     int i = 0;
     while (getline(archivo,linea))
@@ -75,7 +71,7 @@ void cargarCreencias(string creencias[]){
 }
 
 void cargarPecados(string pecados[]){
-    ifstream archivo("C:\\Users\\Amerc\\Documents\\TEC\\ESTRUCTURA_DATOS\\Proyecto2ED\\Proyecto2ED\\Proyecto 2\\Pecados.txt");
+    ifstream archivo("Pecados.txt");
     string linea;
     int i = 0;
     while (getline(archivo,linea))
@@ -84,7 +80,7 @@ void cargarPecados(string pecados[]){
 }
 
 void cargarRedes(string redes[]){
-    ifstream archivo("C:\\Users\\Amerc\\Documents\\TEC\\ESTRUCTURA_DATOS\\Proyecto2ED\\Proyecto2ED\\Proyecto 2\\Redes.txt");
+    ifstream archivo("Redes.txt");
     string linea;
     int i = 0;
     while (getline(archivo,linea))
