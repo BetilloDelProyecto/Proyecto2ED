@@ -3,6 +3,7 @@
 
 #include "StructHumano.h"
 #include <cmath>
+#include "StructDemonio.h"
 
 struct ArbolVida;
 struct Nodo;
@@ -112,6 +113,7 @@ struct StructMundo{
     string creencias[10];
     int cantPoblacion;
     ArbolVida * arbol;
+    Demonio * demonios[7];
 
 
     StructMundo(){
@@ -122,6 +124,7 @@ struct StructMundo{
         cargarProfesiones(profesiones);
         cargarPaises(paises);
         cargarCreencias(creencias);
+        cargarDemonios(demonios, 7);
     }
 
     void generarPoblacion(int cant){
