@@ -12,16 +12,25 @@ struct Heap{
         index = 1;
     }
 
+    StructHumano * peek(){
+        if(index == 1)
+            return nullptr;
+        else
+            return array[1];
+    }
+
     bool estaOrdenado(){
-        for (int i = 1; i < index; i++){
-            if (i*2 <= index)
-                if(array[i]->cantPecados() < array[i*2]->cantPecados())
-                    return false;
-            if (i*2+1 <= index)
-                if(array[i]->cantPecados() < array[i*2+1]->cantPecados())
-                    return false;
-        }
-        return true;
+        if(array[1] != NULL){
+            for (int i = 1; i < index; i++){
+                if (i*2 < index)
+                    if(array[i]->cantPecados() < array[i*2]->cantPecados())
+                        return false;
+                if (i*2+1 < index)
+                    if(array[i]->cantPecados() < array[i*2+1]->cantPecados())
+                        return false;
+            }
+            return true;
+        }  
     }
 
     void ordenar(){
@@ -59,13 +68,13 @@ struct Heap{
         if(index != 1){
             if(index == 2){
                 StructHumano * borrado = array[1];
-                array[1] = NULL;
+                array[1] = nullptr;
                 index -=1;
                 return borrado;
             }else{
                 StructHumano * humano = array[index-1];
                 StructHumano * borrado = array[1];
-                array[index-1] = NULL;
+                array[index-1] = nullptr;
                 array[1] = humano;
                 index -= 2;
                 ordenar();
@@ -120,6 +129,13 @@ struct Familia{
             personas->imprimir();
         }
     }
+
+   StructHumano * peek(){
+        return personas->peek();
+   }
+
+
+
 };
 
 #endif // STRUCT_FAMILIA_H

@@ -103,6 +103,13 @@
     "streambuf": "cpp",
     "typeinfo": "cpp",
     "format": "cpp",
-    "ratio": "cpp"
+    "ratio": "cpp",
+    "charconv": "cpp",
+    "chrono": "cpp",
+    "ctime": "cpp",
+    "iomanip": "cpp",
+    "span": "cpp",
+    "sstream": "cpp",
+    "variant": "cpp"
   }
 }

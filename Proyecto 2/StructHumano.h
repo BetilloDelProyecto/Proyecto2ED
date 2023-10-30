@@ -227,7 +227,7 @@ struct StructHumano{
 
     void imprimir2(){
         cout << "\tID: " << to_string(id) << "\tNombre: " << addPadding(nombre,1, ' ') << " " << addPadding(apellido,10, ' ') << "Pais: " << 
-        addPadding(pais,10, ' ') << "Creencia: " << addPadding(creencia,10, ' ') << "Profesion: " << addPadding(profesion,10, ' ') << "Nacimiento: " << nacimiento << endl;
+        addPadding(pais,10, ' ') << "\tCreencia: " << addPadding(creencia,10, ' ') << "\tProfesion: " << addPadding(profesion,10, ' ') << "\tNacimiento: " << nacimiento << endl;
     }
 
     void ordenarRedes(){

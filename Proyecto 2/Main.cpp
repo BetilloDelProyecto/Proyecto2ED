@@ -1,13 +1,14 @@
 #include "StructDemonio.h"
 #include "StructHumano.h"
 #include "StructMundo.h"
+#include "StructCielo.h"
 #include <iostream>
 
 int main(){
     StructMundo * m1 = new StructMundo();
-    m1->generarPoblacion(500);
+    m1->generarPoblacion(300);
 
-
+    m1->imprimir();
     m1->buscarPorReligion("Cristianismo");
     m1->buscarPorReligion("Cristianismo");
     m1->buscarPorReligion("Islam");
@@ -17,39 +18,19 @@ int main(){
     m1->buscarPorReligion("Bahai");
     m1->buscarPorReligion("Budismo");
     m1->buscarPorReligion("Budismo");
+    
+    //m1->imprimir();
+    //cout << m1->poblacion[1]->cantPecados() << endl;
+    cout << "-----------------------TESTING-------------" << endl;
+    m1->demonios[1]->condenar((m1->poblacion), m1->cantPoblacion);
+    //cout << m1->demonios[1]->familias[0]->personas->index << endl;
+    m1->demonios[1]->imprimirFamilias();
 
-
-    m1->demonios[0]->condenar((m1->poblacion), m1->cantPoblacion);
-    m1->demonios[0]->imprimirFamilias();
-
-
-/*     if(m1->buscar(134123, m1->arbol->raiz,m1->arbol->altura(m1->arbol->raiz), 1) != nullptr){
-        cout << "Encontrado" << endl;
-    }
- */
-/*     StructHumano * h1 = new StructHumano(12,"Beto","Alvarez","CR","cristo","coding","hoy");
-    StructHumano * h2 = new StructHumano(14,"Alfredo","Badilla","CR","cristo","coding","hoy");
-    h1->amigos[0] = h2;
-    h1->amigosEncontrados = 1;
-    h1->cantAmigos = 10;
-    h2->amigos[0] = h1;
-    h2->amigosEncontrados = 1;
-    h2->cantAmigos = 10;
-    h2->hacerPublicacion4(1);
-    h1->hacerPublicacion4(4);
-
-    //h1->imprimir();
-    //h2->imprimir();
-    cout << "\n\n--------------TESTING" << endl;
-    Familia * f1 = new Familia("Costa Rica", "Alvarez");
-    f1->insertar(h1);
-    f1->imprimir();
-    f1->insertar(h2);
-    f1->imprimir(); */
-
-
-
-
+    cout << "TESTEANDO LA VARA"  << endl;
+    StructHumano * h1 = m1->quitarMasPecador();
+    if (h1 != nullptr)
+        h1->imprimir();
+    
     return 0;
 } 
 

@@ -267,6 +267,42 @@ struct StructMundo{
             cout << "No se encontro el humano" << endl;
         }
     }
+
+    StructHumano * getMasPecador(){
+        StructHumano * humanos[100000];
+        int encontrados = 0;
+        for (int i = 0; i < 7; i++)
+            for (int j = 0; j < demonios[i]->cantidadFamilias; j++)
+                if(demonios[i]->familias[j]->peek() != nullptr)
+                    humanos[encontrados++]  = demonios[i]->familias[j]->peek();
+        
+        for (int i = 0; i < encontrados-1; i++)
+            for (int j = 0; j < encontrados-1; j++)
+                if (humanos[i]->cantPecados() < humanos[i+1]->cantPecados()){
+                    StructHumano * h1 = humanos[i];
+                    StructHumano * h2 = humanos[i+1];
+                    humanos[i] = h2;
+                    humanos[i+1] = h1;
+                }
+
+        if(encontrados != 0)
+            return humanos[0];
+        else
+            return nullptr; 
+    }
+
+    StructHumano * quitarMasPecador(){
+        StructHumano * h1 = getMasPecador();
+        if(h1 != nullptr){
+            for (int i = 0; i < 7; i++)
+                for (int j = 0; j < demonios[i]->cantidadFamilias; j++)
+                    if (demonios[i]->familias[j]->peek() != nullptr && demonios[i]->familias[j]->peek()->id == h1->id){
+                        return demonios[i]->familias[j]->borrar();
+                    }
+                    
+        }else return nullptr;
+    }
+
 };
 
 
