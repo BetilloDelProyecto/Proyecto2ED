@@ -1,6 +1,7 @@
 #include "StructHumano.h"
 #include <cmath>
 #include "StructDemonio.h"
+#include "StructArbol.h"
 
 
 #ifndef STRUCT_MUNDO_H
@@ -59,8 +60,6 @@ struct ArbolVida{
         }
     }
 
-    
-
     int altura(Nodo * nodo){
         if(nodo == nullptr)
             return 0;
@@ -117,6 +116,7 @@ struct StructMundo{
     int cantPoblacion;
     ArbolVida * arbol;
     Demonio * demonios[7];
+    ArbolTernario * arbolTernarioAngeles;
 
 
     StructMundo(){
@@ -128,6 +128,8 @@ struct StructMundo{
         cargarPaises(paises);
         cargarCreencias(creencias);
         cargarDemonios(demonios, 7);
+        arbolTernarioAngeles = new ArbolTernario();
+        arbolTernarioAngeles->insertarInicial();
     }
 
     void generarPoblacion(int cant){
@@ -238,13 +240,15 @@ struct StructMundo{
             return buscar(id, nodo->der, nivelAlcanzar, nivelActual+1);
     }
 
-    //FALTA OPTIMIZAR COMPLEJIDAD O^CANTIDADHUMANOS - CANTIDADHUMANOS[INDEX]
+    //Buscar en array
     StructHumano * buscarEnArray(int _id, StructHumano ** ptHumano){
         if(_id < (*ptHumano)->id){
             while(ptHumano != nullptr){
             ptHumano = ptHumano - 1;
                 if((*ptHumano)->id == _id)
                     return *ptHumano;
+                else if((*ptHumano)->id < _id)
+                    return nullptr;
             }
         }else{
             if(_id > (*ptHumano)->id){
@@ -252,6 +256,8 @@ struct StructMundo{
                     ptHumano = ptHumano + 1;
                     if((*ptHumano)->id == _id)
                         return *ptHumano;
+                    else if((*ptHumano)->id > _id)
+                        return nullptr;    
                 }
             }
         }
@@ -284,7 +290,6 @@ struct StructMundo{
                     humanos[i] = h2;
                     humanos[i+1] = h1;
                 }
-
         if(encontrados != 0)
             return humanos[0];
         else

@@ -36,16 +36,13 @@ int main(){
     m1->generarPoblacion(1000);
 
     m1->arbol->inOrder(m1->arbol->raiz);
-    cout << m1->poblacionArbolVidaAplastada[0] -1 << endl;
-    cout << &m1->poblacion[498] << endl;
-    cout << (*(m1->poblacionArbolVidaAplastada[3]))->id << endl;
 
-    cout << "-----------------------TESTING-------------" << endl;
+/*     cout << "-----------------------TESTING-------------" << endl;
     m1->arbolTernarioAngeles->llenarNivel();
     m1->arbolTernarioAngeles->llenarNivel();
     m1->arbolTernarioAngeles->llenarNivel();
     m1->arbolTernarioAngeles->llenarNivel();
-    m1->arbolTernarioAngeles->imprimir(m1->arbolTernarioAngeles->raiz);
+    m1->arbolTernarioAngeles->imprimir(m1->arbolTernarioAngeles->raiz); */
     return 0;
 } 
 
