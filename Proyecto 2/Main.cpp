@@ -3,9 +3,10 @@
 #include "StructMundo.h"
 #include "StructCielo.h"
 #include <iostream>
+#include "StructArbol.h"
 
 int main(){
-    StructMundo * m1 = new StructMundo();
+/*     StructMundo * m1 = new StructMundo();
     m1->generarPoblacion(300);
 
     m1->imprimir();
@@ -29,8 +30,22 @@ int main(){
     cout << "TESTEANDO LA VARA"  << endl;
     StructHumano * h1 = m1->quitarMasPecador();
     if (h1 != nullptr)
-        h1->imprimir();
-    
+        h1->imprimir(); */
+
+    StructMundo * m1 = new StructMundo();
+    m1->generarPoblacion(1000);
+
+    m1->arbol->inOrder(m1->arbol->raiz);
+    cout << m1->poblacionArbolVidaAplastada[0] -1 << endl;
+    cout << &m1->poblacion[498] << endl;
+    cout << (*(m1->poblacionArbolVidaAplastada[3]))->id << endl;
+
+    cout << "-----------------------TESTING-------------" << endl;
+    m1->arbolTernarioAngeles->llenarNivel();
+    m1->arbolTernarioAngeles->llenarNivel();
+    m1->arbolTernarioAngeles->llenarNivel();
+    m1->arbolTernarioAngeles->llenarNivel();
+    m1->arbolTernarioAngeles->imprimir(m1->arbolTernarioAngeles->raiz);
     return 0;
 } 
 
