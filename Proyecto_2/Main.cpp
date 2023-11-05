@@ -4,6 +4,7 @@
 #include "StructCielo.h"
 #include <iostream>
 #include "StructArbol.h"
+#include <cstdlib>
 
 int main(){
 /*     StructMundo * m1 = new StructMundo();
@@ -37,12 +38,18 @@ int main(){
 
     m1->arbol->inOrder(m1->arbol->raiz);
 
-/*     cout << "-----------------------TESTING-------------" << endl;
+    cout << "-----------------------TESTING-------------" << endl;
     m1->arbolTernarioAngeles->llenarNivel();
-    m1->arbolTernarioAngeles->llenarNivel();
-    m1->arbolTernarioAngeles->llenarNivel();
-    m1->arbolTernarioAngeles->llenarNivel();
-    m1->arbolTernarioAngeles->imprimir(m1->arbolTernarioAngeles->raiz); */
+    m1->arbolTernarioAngeles->imprimir(m1->arbolTernarioAngeles->raiz);
+    
+    cout << "-----------------------TESTING2-------------" << endl;
+    //Envio de correos electronicos template
+    std::string subject = "Probando c++";
+    std::string body = "Esto es una prueba de c++";
+    std::string filepath = "../Proyecto_2/Nombres.txt";
+
+    std::string command = "python email_sender.py \"" + subject + "\" \"" + body + "\" \"" + filepath + "\"";
+    system(command.c_str());
     return 0;
 } 
 
