@@ -18,7 +18,13 @@ struct NodoAngel{
     }
 
     void imprimir(){
-        cout << angel->nombre << " "<< angel->version << " " <<angel->generacion <<   endl;
+        if(angel->h != nullptr){
+            cout << "Nombre: "<<angel->nombre << "\tVersion: "<< angel->version << "\tGeneracion: " <<angel->generacion << "\nHumano Salvado:\n";
+            angel->h->imprimir();
+        }else{
+            cout << "Nombre: "<<angel->nombre << "\tVersion: "<< angel->version << "\tGeneracion: " <<angel->generacion << "\nHumano Salvado: No ha salvado ha nadie...\n" << endl;
+        }
+            
     }
 };
 
@@ -29,6 +35,19 @@ struct ArbolTernario{
     ArbolTernario(){
         raiz = nullptr;
         nivel = 0;
+        insertarInicial();
+    }
+
+    bool estaHumano(StructHumano * h ,NodoAngel * root){
+        if (root == nullptr){
+            return false;
+        }else if(root->angel->h == nullptr ){
+            return false || estaHumano(h,root->izq) || estaHumano(h,root->cen) || estaHumano(h,root->der);
+        }else if(root->angel->h != nullptr && h->id == root->angel->h->id){
+            return true;
+        }else
+            return estaHumano(h,root->izq) || estaHumano(h,root->cen) || estaHumano(h,root->der);
+        
     }
 
     void insertarInicial(){
@@ -74,6 +93,25 @@ struct ArbolTernario{
         nodo->imprimir();
         imprimir(nodo->cen);
         imprimir(nodo->der);
+    }
+
+    void insertarHumano(StructHumano * _h , NodoAngel * nodo){
+        if(nodo != NULL && !estaHumano(_h,raiz)){
+            if (nodo != nullptr){
+                if(nodo->angel->nombre != "El Dios" && nodo->angel->nombre != "Serafines" && nodo->angel->nombre != "Querubines"  && nodo->angel->nombre != "Tronos" && nodo->angel->h == nullptr){
+                    nodo->angel->h = _h;
+                    return;
+                }else{
+                    insertarHumano(_h,nodo->izq);
+                    insertarHumano(_h,nodo->cen);
+                    insertarHumano(_h,nodo->der);
+                }
+            }
+        }else return;
+    }
+
+    NodoAngel * getRaiz(){
+        return raiz;
     }
 
 

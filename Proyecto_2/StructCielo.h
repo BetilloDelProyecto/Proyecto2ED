@@ -7,10 +7,22 @@ struct nodoAvl{
     StructHumano *h;
     nodoAvl *l;
     nodoAvl *r;
+
+    nodoAvl(StructHumano * _h){
+        h = _h;
+        l = nullptr;
+        r = nullptr;
+    }
+
+    nodoAvl(){
+        h = nullptr;
+        l = nullptr;
+        r = nullptr;
+    }
 };
 
 struct avl_tree{
-    nodoAvl *root;
+    nodoAvl *root = NULL;
     
     avl_tree() {
         root = NULL;
@@ -39,7 +51,6 @@ struct avl_tree{
         t = parent->r;
         parent->r = t->l;
         t->l = parent;
-        cout<<"Right-Right Rotation";
         return t;
     }
 
@@ -48,7 +59,6 @@ struct avl_tree{
         t = parent->l;
         parent->l = t->r;
         t->r = parent;
-        cout<<"Left-Left Rotation";
         return t;
     }
 
@@ -56,7 +66,6 @@ struct avl_tree{
         nodoAvl *t;
         t = parent->l;
         parent->l = rr_rotat(t);
-        cout<<"Left-Right Rotation";
         return ll_rotat(parent);
     }
 
@@ -64,7 +73,6 @@ struct avl_tree{
         nodoAvl *t;
         t = parent->r;
         parent->r = ll_rotat(t);
-        cout<<"Right-Left Rotation";
         return rr_rotat(parent);
     }
 
@@ -84,12 +92,9 @@ struct avl_tree{
         return t;
     }
 
-    nodoAvl *insert(StructHumano *x, nodoAvl *t){
+    nodoAvl * insert(StructHumano *x, nodoAvl *t){
         if (t == NULL) {
-            t = new nodoAvl;
-            t->h = x;
-            t->l = NULL;
-            t->r = NULL;
+            t = new nodoAvl(x);
             return t;
         } else if (x->id < t->h->id) {
             t->l = insert(x, t->l);
@@ -129,7 +134,9 @@ struct Cielo{
     avl_tree * cielo[1000];
 
     Cielo(){
-        //cout << "hola xd" << endl;
+        for (int i = 0; i < 1000; i++)
+            cielo[i] = new avl_tree();
+        
     }
 
     int getID(StructHumano * h){
@@ -139,7 +146,17 @@ struct Cielo{
     void insertar(StructHumano * h){
         h->salvado = true;
         h->condenado = false;
-        cielo[getID(h)]->insert(h,cielo[getID(h)]->root);
+        cielo[getID(h)]->root =  cielo[getID(h)]->insert(h,cielo[getID(h)]->root);
+    }
+
+    void imprimir(){
+        for (int i = 0; i < 1000; i++){
+            if(cielo[i]->root != nullptr){
+                cout << "\nBucket: " << i << endl;
+                cielo[i]->inOrder(cielo[i]->root);
+            }
+        }
+        
     }
 
 };

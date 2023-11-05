@@ -207,20 +207,27 @@ struct StructHumano{
     }
 
     void imprimir(){
-        cout << "ID: " << to_string(id) << "\tNombre: " <<addPadding(nombre,1, ' ') << " " << addPadding(apellido,10, ' ') << "\tPais: " << 
+        string estado = "";
+        if(vivo)
+            estado = "Vivo";
+        else if(condenado)
+            estado = "Infierno";
+        else if (salvado)
+            estado = "Cielo";
+        cout << "ID: " << to_string(id) << "\tNombre: " <<addPadding(nombre,1, ' ') << " "  << addPadding(apellido,10, ' ') << "\tEstado: " << estado<< "\tPais: " << 
         addPadding(pais,10, ' ') << "\tCreencia: " << addPadding(creencia,10, ' ') << "\tProfesion: " << addPadding(profesion,10, ' ') << "\tNacimiento: " << nacimiento << endl << "Amigos:\n";
-        for (int i = 0; i < amigosEncontrados; i++){
+        for (int i = 0; i < amigosEncontrados; i++)
             amigos[i]->imprimir2();
-        }
+        
         cout << "\nPecados:\n";
-        for (int i = 0; i < 7; i++){
+        for (int i = 0; i < 7; i++)
             pecados[i]->imprimir();
-        }
+        
 
         cout << "\nRedes:\n";
-        for (int i = 0; i < 7; i++){
+        for (int i = 0; i < 7; i++)
             redesSociales[i]->imprimir();
-        }
+        
         
         cout << "-----------------------------------------------------------------------------" << endl;
     }

@@ -2,7 +2,7 @@
 #include <cmath>
 #include "StructDemonio.h"
 #include "StructArbol.h"
-
+#include "StructCielo.h"
 
 #ifndef STRUCT_MUNDO_H
 #define STRUCT_MUNDO_H
@@ -105,6 +105,9 @@ Nodo *ArrMundoToArbol(StructHumano *humanos[],int inicio, int final, int profund
 }
 
 struct Demonio;
+struct Cielo;
+
+
 
 struct StructMundo{
     StructHumano * poblacion[100000];
@@ -117,6 +120,7 @@ struct StructMundo{
     ArbolVida * arbol;
     Demonio * demonios[7];
     ArbolTernario * arbolTernarioAngeles;
+    Cielo * cielo;
 
 
     StructMundo(){
@@ -129,7 +133,8 @@ struct StructMundo{
         cargarCreencias(creencias);
         cargarDemonios(demonios, 7);
         arbolTernarioAngeles = new ArbolTernario();
-        arbolTernarioAngeles->insertarInicial();
+        cielo = new Cielo();
+        
     }
 
     void generarPoblacion(int cant){
@@ -284,7 +289,7 @@ struct StructMundo{
         
         for (int i = 0; i < encontrados-1; i++)
             for (int j = 0; j < encontrados-1; j++)
-                if (humanos[i]->cantPecados() < humanos[i+1]->cantPecados()){
+                if (humanos[i] != nullptr && humanos[i+1] != nullptr && humanos[i]->cantPecados() < humanos[i+1]->cantPecados()){
                     StructHumano * h1 = humanos[i];
                     StructHumano * h2 = humanos[i+1];
                     humanos[i] = h2;
@@ -308,6 +313,19 @@ struct StructMundo{
         }else return nullptr;
     }
 
+
+    void salvacion(){
+        arbolTernarioAngeles->llenarNivel();
+        StructHumano * h1 = nullptr;
+        for (int i = 0; i < pow(3,arbolTernarioAngeles->nivel-1); i++){
+            h1 = quitarMasPecador();
+            if(h1 != nullptr){
+                cielo->insertar(h1);
+                arbolTernarioAngeles->insertarHumano(h1,arbolTernarioAngeles->raiz);
+            }
+        }
+        
+    }
 };
 
 

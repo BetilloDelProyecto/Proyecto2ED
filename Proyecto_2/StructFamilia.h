@@ -23,10 +23,10 @@ struct Heap{
         if(array[1] != NULL){
             for (int i = 1; i < index; i++){
                 if (i*2 < index)
-                    if(array[i]->cantPecados() < array[i*2]->cantPecados())
+                    if(array[i] != nullptr && array[i*2] != nullptr &&  array[i]->cantPecados() < array[i*2]->cantPecados())
                         return false;
                 if (i*2+1 < index)
-                    if(array[i]->cantPecados() < array[i*2+1]->cantPecados())
+                    if(array[i] != nullptr && array[i*2+1] != nullptr && array[i]->cantPecados() < array[i*2+1]->cantPecados())
                         return false;
             }
             return true;
