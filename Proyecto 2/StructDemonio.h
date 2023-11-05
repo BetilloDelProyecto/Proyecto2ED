@@ -50,7 +50,6 @@ struct Demonio{
     void condenar(StructHumano ** _poblacion, int cantPoblacion){
         StructHumano * tmp[100000];
         for(int i = 0; i < cantPoblacion; i++){
-            //cout << (*(_poblacion[i])).id << endl;
             tmp[i] = (_poblacion[i]);
         }
         ordenarPorPecado(pecado, tmp, cantPoblacion);
