@@ -10,8 +10,9 @@
 
 int main(){
     StructMundo * m1 = new StructMundo();
+    gestionMenu(m1);
     //gestionMenu(m1);
-    
+    /*50
     
     m1->generarPoblacion(500);
     
@@ -75,8 +76,9 @@ int main(){
 
     //m1->arbolTernarioAngeles->imprimir(m1->arbolTernarioAngeles->raiz);
     cout << m1->arbolTernarioAngeles->toString(m1->arbolTernarioAngeles->raiz,"");
-
     /*
+    /*
+    
     
     StructMundo * m1 = new StructMundo();
     StructHumano * h1 = new StructHumano(1,"beto","alvarez","cr","cristo","code","ya");
@@ -91,8 +93,9 @@ int main(){
     t1->imprimir(t1->raiz);
     cout << "test index arbol: " << pow(3,t1->nivel-1) << endl;
     
+    */
 
-    cout << "-----------------------TESTING2-------------" << endl;
+/*     cout << "-----------------------TESTING2-------------" << endl;
     //Envio de correos electronicos template
     std::string subject = "Probando c++";
     std::string body = "Esto es una prueba de c++";
@@ -100,7 +103,7 @@ int main(){
 
     std::string command = "python email_sender.py \"" + subject + "\" \"" + body + "\" \"" + filepath + "\"";
     system(command.c_str());
-    */
+     */
     return 0;
 }
 

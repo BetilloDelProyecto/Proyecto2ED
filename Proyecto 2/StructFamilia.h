@@ -9,7 +9,7 @@ struct Heap{
     int index;
 
     Heap(){
-        index = 1;
+        index = 0;
     }
 
     StructHumano * peek(){
@@ -24,49 +24,49 @@ struct Heap{
         return 0;
     else
         return index-1;
-   }
+        }
+        
+    void heapify(int n, int i) {
+        int smallest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
 
-    bool estaOrdenado(){
-        if(array[1] != NULL){
-            for (int i = 1; i < index; i++){
-                if (i*2 < index)
-                    if(array[i] != nullptr && array[i*2] != nullptr &&  array[i]->cantPecados() < array[i*2]->cantPecados())
-                        return false;
-                if (i*2+1 < index)
-                    if(array[i] != nullptr && array[i*2+1] != nullptr && array[i]->cantPecados() < array[i*2+1]->cantPecados())
-                        return false;
-            }
-            return true;
-        }  
+        if (left < n && array[left]->cantPecados() < array[smallest]->cantPecados())
+            smallest = left;
+
+        if (right < n && array[right]->cantPecados() < array[smallest]->cantPecados())
+            smallest = right;
+
+        if (smallest != i) {
+            std::swap(array[i], array[smallest]);
+            heapify(n, smallest);
+        }
     }
 
-    void ordenar(){
-        StructHumano * h1 = nullptr,* h2  = nullptr;
-        for (int i = 1; i < index; i++){
-            if (i*2 <= index){
-                if(array[i] != nullptr && array[i*2] != nullptr && array[i]->cantPecados() < array[i*2]->cantPecados()){
-                    h1 = array[i];
-                    h2 = array[i*2];
-                    array[i] = h2;
-                    array[i*2] = h1;
-                }
-            }
-            if (i*2+1 <= index){
-                if(array[i] != nullptr && array[i*2] != nullptr && array[i]->cantPecados()  < array[i*2+1]->cantPecados() ){
-                    h1 = array[i];
-                    h2 = array[i*2+1];
-                    array[i] = h2;
-                    array[i*2+1] = h1;
-                }
-            }
+    // main function to do heap sort
+    void ordenar() {
+        int n = index;
+        // Build max heap
+        for (int i = n / 2 - 1; i >= 0; i--)
+            heapify(n, i);
+        // Heap sort
+        for (int i = n - 1; i >= 0; i--) {
+            // Move current root to end
+            std::swap(array[0], array[i]);
+            // Call max heapify on the reduced heap
+            heapify(i, 0);
         }
-        if(!estaOrdenado())
-            ordenar();        
+
+        print();
+    }
+    void print(){
+        for (int i = 0; i < index; ++i)
+            std::cout << array[i]->cantPecados() << " ";
+        std::cout << "\n";
     }
 
     void insertar(StructHumano * humano){
         array[index] = humano;
-        
         ordenar();
         index += 1;
     }

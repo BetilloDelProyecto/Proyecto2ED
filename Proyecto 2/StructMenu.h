@@ -163,7 +163,7 @@ void menuCondenar(StructMundo * mundo){
     getline(cin, frase);
     if (tryStringToInt(frase)){
         int num = stoi(frase);
-        if( num <= 0  || num > 7){
+        if( num > 0  || num <= 7){
             if(mundo->cantPoblacion > 0){
                 mundo->demonios[num-1]->condenar(mundo->poblacion,mundo->cantPoblacion);
                 cout<< "\n\nCondenacion existosa...\n\n";

@@ -8,7 +8,7 @@
 struct Demonio{
     std::string nombre;
     std::string pecado;
-    Familia * familias[200];
+    Familia * familias[350];
     int cantidadFamilias;
 
     Demonio(std::string _nombre, std::string _pecado){
@@ -58,16 +58,15 @@ struct Demonio{
 
     void condenar(StructHumano ** _poblacion, int cantPoblacion){
         StructHumano * tmp[100000];
-        for(int i = 0; i < cantPoblacion; i++){
+        std::copy(_poblacion, _poblacion + cantPoblacion, tmp);
+/*         for(int i = 0; i < cantPoblacion; i++){
             tmp[i] = (_poblacion[i]);
-        }
+        } */
         ordenarPorPecado(pecado, tmp, cantPoblacion);
-        int cantCondenador = cantPoblacion * 0.05;
-        for(int i = 0; i < cantCondenador; i++){
-            if(i == cantPoblacion-1 ){
-                break;
-            } else{
-                if(tmp[i]->condenado == true || tmp[i]->salvado == true){
+        int pecadoresDelPecado = std::count_if(tmp, tmp + cantPoblacion, [this](StructHumano * h){return h->getCantidadPecado(pecado) > 0;});
+        int cantCondenador = pecadoresDelPecado * 0.05;
+        for(int i = 0; i < min(cantCondenador, cantPoblacion -1); i++){
+            if(tmp[i]->condenado == true || tmp[i]->salvado == true){
                     cantCondenador++;
                 } else{
                     tmp[i]->condenado = true;
@@ -76,21 +75,13 @@ struct Demonio{
                 }
             }
         }
-    }
 
     void ordenarPorPecado(std::string pecado, StructHumano * poblacion[], int cantPoblacion){
-        for (int i = 0; i < cantPoblacion; i++){
-            for (int j = 0; j < cantPoblacion-1; j++){
-                if(poblacion[j]->getCantidadPecado(pecado) < poblacion[j+1]->getCantidadPecado(pecado)){
-                    StructHumano * h1 = poblacion[j];
-                    StructHumano * h2 = poblacion[j+1];
-                    poblacion[j] = h2;
-                    poblacion[j+1] = h1;
-                }
-            } 
-        }  
-    }
- 
+        std::sort(poblacion, poblacion + cantPoblacion, 
+            [pecado](StructHumano* a, StructHumano* b) { 
+                return a->getCantidadPecado(pecado) > b->getCantidadPecado(pecado); 
+            });
+}
     void imprimirFamilias(){
         cout << nombre << "\tPecado: "<< pecado << endl;
         for(int i = 0; i < cantidadFamilias; i++){

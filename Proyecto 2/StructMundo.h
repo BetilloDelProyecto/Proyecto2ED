@@ -4,6 +4,7 @@
 #include "StructDemonio.h"
 #include "StructArbol.h"
 #include "StructCielo.h"
+#include <unordered_set>
 
 #ifndef STRUCT_MUNDO_H
 #define STRUCT_MUNDO_H
@@ -394,10 +395,11 @@ struct StructMundo{
         }else{
             cout << "no hay pecador" << endl;
         }
-        if(cantPoblacion > 0 ){
-            cout << "Personas Vivas: " << getGenteViva() <<"\tPorcentaje: "  << (getGenteViva()/cantPoblacion)*100 <<"%"<<endl;
-            cout << "Personas en el infierno: " << getGenteMuerta() <<"\tPorcentaje: "  << (getGenteMuerta()/cantPoblacion)*100 <<"%" <<endl;
-            cout << "Personas en el cielo: " << getGenteCielo() <<"\tPorcentaje: "  << (getGenteCielo()/cantPoblacion)*100<<"%" <<endl;
+        if(getGenteViva() > 0 || getGenteMuerta() > 0 || getGenteCielo() > 0 ){
+            (static_cast<double>(getGenteViva()/static_cast<double>(cantPoblacion)))*100;
+            cout << "Personas Vivas: " << getGenteViva() <<"\tPorcentaje: "  << (static_cast<double>(getGenteViva()/static_cast<double>(cantPoblacion)))*100 <<"%"<<endl;
+            cout << "Personas en el infierno: " << getGenteMuerta() <<"\tPorcentaje: "<<  (static_cast<double>(getGenteMuerta()/static_cast<double>(cantPoblacion)))*100 <<"%" <<endl;
+            cout << "Personas en el cielo: " << getGenteCielo() <<"\tPorcentaje: "  << (static_cast<double>(getGenteCielo()/static_cast<double>(cantPoblacion)))*100<<"%" <<endl;
         }else{
             cout << "Personas Vivas: " << getGenteViva() <<"\t\tPorcentaje: 0%" <<endl;
             cout << "Personas en el infierno: " << getGenteMuerta() <<"\t\tPorcentaje: 0%" <<endl;
