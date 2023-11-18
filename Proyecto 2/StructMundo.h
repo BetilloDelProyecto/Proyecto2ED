@@ -185,9 +185,6 @@ struct StructMundo{
                 poblacion[i] = new StructHumano(id,nombres[numRandom(999)],apellidos[numRandom(14)],paises[numRandom(19)],creencias[numRandom(9)],profesiones[numRandom(19)],getDateTime());
                 poblacion[i]->cantAmigos = numRandom(100);
                 i++;
-            }else{
-                repeticiones += 1;
-                cant += 1; 
             }
         }
         cantPoblacion += cant;

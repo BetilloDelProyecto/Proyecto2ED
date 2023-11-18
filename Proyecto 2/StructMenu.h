@@ -54,8 +54,13 @@ void gestionMenu(StructMundo * mundo){
                 case 4://
                     menuCielo(mundo);
                     break;
-
                 case 5://
+                    if(mundo->getGenteMuerta() > mundo->getGenteCielo() )
+                        cout << "Ha gando el Infierno, personas en el cielo: " << mundo->getGenteCielo() << "\t Personas en el infierno: " << mundo->getGenteMuerta() << "\t Personas vivas: " <<  mundo->getGenteViva() <<  endl;
+                    else if (mundo->getGenteMuerta() < mundo->getGenteCielo())
+                         cout << "Ha gando el Cielo, personas en el cielo: " << mundo->getGenteCielo() << "\t Personas en el infierno: " << mundo->getGenteMuerta() << "\t Personas vivas: " <<  mundo->getGenteViva() <<  endl;
+                    else
+                        cout << "Hay un empate, personas en el cielo: " << mundo->getGenteCielo() << "\t Personas en el infierno: " << mundo->getGenteMuerta() << "\t Personas vivas: " <<  mundo->getGenteViva() <<  endl;
                     cout << "\n\nAdios\n\n";
                     return;
                 default:
