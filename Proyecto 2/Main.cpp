@@ -99,11 +99,10 @@ int main(){
     //Envio de correos electronicos template
     std::string subject = "Probando c++";
     std::string body = "Esto es una prueba de c++";
-    std::string filepath = "../Proyecto_2/Nombres.txt";
+    std::string filepath = "../.vscode/settings.json";
 
     std::string command = "python email_sender.py \"" + subject + "\" \"" + body + "\" \"" + filepath + "\"";
-    system(command.c_str());
-     */
+    system(command.c_str()); */
     return 0;
 }
 

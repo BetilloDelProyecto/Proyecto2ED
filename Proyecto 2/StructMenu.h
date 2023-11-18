@@ -136,10 +136,12 @@ void menuInfierno(StructMundo * mundo){
                 }
                 
                 break;
-             case 3://
+            case 3://
                 for (int i = 0; i < 7; i++){
                     mundo->demonios[i]->condenar(mundo->poblacion,mundo->cantPoblacion);
                 }
+                mundo->enviarCorreo();
+                cout << "\n\nCondenacion existosa...\n\n";
                 break;
             default:
                 cout << "\nOpcion invalida\n\n" << endl;
@@ -286,8 +288,9 @@ void menuPublicarPorID(StructMundo  * mundo){
 void menuPublicarPorReligion(StructMundo * mundo){
     string frase,cant;
     cout << "\n\n_____________Publicacion por religion_____________"<< endl;
-    cout << "Escoge una religion: ";
+    cout << "Escoge una religion:";
     getline(cin, frase);
+    cout << frase << endl;
     if(mundo->existeReligion(frase)){
         mundo->buscarPorReligion(frase);
         cout << "\n\nPublicacion exitosa\n\n";

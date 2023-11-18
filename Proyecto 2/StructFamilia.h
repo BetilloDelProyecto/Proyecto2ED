@@ -25,7 +25,6 @@ struct Heap{
     else
         return index-1;
         }
-        
     void heapify(int n, int i) {
         int smallest = i;
         int left = 2 * i + 1;
@@ -56,13 +55,6 @@ struct Heap{
             // Call max heapify on the reduced heap
             heapify(i, 0);
         }
-
-        print();
-    }
-    void print(){
-        for (int i = 0; i < index; ++i)
-            std::cout << array[i]->cantPecados() << " ";
-        std::cout << "\n";
     }
 
     void insertar(StructHumano * humano){

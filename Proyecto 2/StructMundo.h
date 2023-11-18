@@ -5,6 +5,7 @@
 #include "StructArbol.h"
 #include "StructCielo.h"
 #include <unordered_set>
+#include <cstdio>
 
 #ifndef STRUCT_MUNDO_H
 #define STRUCT_MUNDO_H
@@ -188,7 +189,7 @@ struct StructMundo{
     void ordenarPoblacion(){
         for (int i = 0; i < cantPoblacion; i++){
             for (int j = 0; j < cantPoblacion-1; j++){
-                if(poblacion[j]->id > poblacion[j+1]->id){
+                if(poblacion[j]->id > poblacion[j+1]->id){ // SE DA ERROR SI SE GENERAN 2 VECES LAS GENERACIONES
                     StructHumano * h1 = poblacion[j];
                     StructHumano * h2 = poblacion[j+1];
                     poblacion[j] = h2;
@@ -342,6 +343,7 @@ struct StructMundo{
                     }
                     
         }else return nullptr;
+    return nullptr;
     }
 
 
@@ -438,6 +440,16 @@ struct StructMundo{
                 return true;
         }
         return false;
+    }
+
+    void enviarCorreo(){
+        std::string subject = "Probando c++";
+        std::string body = "Esto es una prueba de c++";
+        std::string filepath = "DemoniosLogs/LogGeneral.txt";
+        std::string command = "python email_sender.py \"" + subject + "\" \"" + body + "\" \"" + filepath + "\" > output.txt 2>&1";
+        FILE * in = _popen(command.c_str(), "r");
+        _pclose(in);
+        
     }
 };
 

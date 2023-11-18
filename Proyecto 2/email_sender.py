@@ -16,7 +16,7 @@ def emailSender(_subject , _content, _filepath):
     msg = EmailMessage()
     msg['Subject'] = _subject
     msg['From'] = EMAIL_ADDRESS
-    msg['To'] = '' # Se debe ingresar el correo electrónico del destinatario
+    msg['To'] = 'amercado.rios1905@gmail.com' # Se debe ingresar el correo electrónico del destinatario
     msg.set_content(_content)
 
     with open(_filepath, 'rb') as f:
@@ -32,7 +32,7 @@ def emailSender(_subject , _content, _filepath):
     # smtp.ehlo() # Identifica el servido de correo gmail nuevamente para la conexión encriptada
         smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD) # Inicia sesión en el servidor de correo electrónico
         smtp.send_message(msg) # Envía el correo electrónico
-    print('Correo enviado con exito') # Se imprime en consola que el correo fue enviado con éxito
+
 
 if __name__ == '__main__':
     emailSender(sys.argv[1], sys.argv[2], sys.argv[3]) # Se ejecuta la función emailSender con los argumentos pasados por consola

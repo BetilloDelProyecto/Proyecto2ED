@@ -315,6 +315,7 @@ struct StructHumano{
                 }
             }
         }
+        return 0;
     }
 
     void hacerPublicacion1(const string& _red){
@@ -383,6 +384,7 @@ struct StructHumano{
                 return pecados[i]->cantidad;
             }
         }
+        return 0;
     }
 
 
