@@ -371,8 +371,9 @@ struct StructMundo{
             if(h1 != nullptr){
                 cielo->insertar(h1);
                 arbolTernarioAngeles->insertarHumano(h1,arbolTernarioAngeles->raiz);
-            }else
-                cout << "No encontro pecador" << endl;
+            }else{
+                    cout << "No encontro pecador" << endl;
+                }
         }
     }
 
@@ -458,14 +459,31 @@ struct StructMundo{
         return false;
     }
 
-    void enviarCorreo(){
-        std::string subject = "Probando c++";
-        std::string body = "Esto es una prueba de c++";
+    void enviarCorreoDemonios(){
+        std::string subject = "Logs Demonios";
+        std::string body = "Estos son los logs de los demonios " + getDateTime();
         std::string filepath = "DemoniosLogs/LogGeneral.txt";
         std::string command = "python email_sender.py \"" + subject + "\" \"" + body + "\" \"" + filepath + "\" > output.txt 2>&1";
         FILE * in = _popen(command.c_str(), "r");
         _pclose(in);
         
+    }
+
+    void enviarCorreoAngeles(){
+        std::string subject = "Logs Angeles";
+        std::string body = "Estos son los logs de los Angeles " + getDateTime();
+        std::string filepath = "AngelesLogs/LogGeneral.txt";
+        std::string command = "python email_sender.py \"" + subject + "\" \"" + body + "\" \"" + filepath + "\" > output.txt 2>&1";
+        FILE * in = _popen(command.c_str(), "r");
+        _pclose(in);
+    }
+
+    std::string getDateTime(){
+        const auto now = std::chrono::system_clock::now();
+        const std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+        std::string s = std::ctime(&now_c);
+        s.pop_back();
+        return s;
     }
 };
 

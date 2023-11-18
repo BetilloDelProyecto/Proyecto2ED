@@ -78,8 +78,10 @@ void menuCielo(StructMundo * mundo){
         int num = stoi(frase);
         switch (num){
             case 1://
-                if(mundo->getGenteMuerta() >= pow(3,mundo->arbolTernarioAngeles->nivel))
+                if(mundo->getGenteMuerta() >= pow(3,mundo->arbolTernarioAngeles->nivel)){
                     mundo->salvacion();
+                    mundo->enviarCorreoAngeles();
+                }
                 else
                     cout << "\nNo hay la suficiente cantidad de muertos,condena mas personas\n" << endl;
                 break;
@@ -140,7 +142,7 @@ void menuInfierno(StructMundo * mundo){
                 for (int i = 0; i < 7; i++){
                     mundo->demonios[i]->condenar(mundo->poblacion,mundo->cantPoblacion);
                 }
-                mundo->enviarCorreo();
+                mundo->enviarCorreoDemonios();
                 cout << "\n\nCondenacion existosa...\n\n";
                 break;
             default:
@@ -288,14 +290,13 @@ void menuPublicarPorID(StructMundo  * mundo){
 void menuPublicarPorReligion(StructMundo * mundo){
     string frase,cant;
     cout << "\n\n_____________Publicacion por religion_____________"<< endl;
-    cout << "Escoge una religion:";
+    cout << "Escoge una religion: ";
     getline(cin, frase);
     cout << frase << endl;
     if(mundo->existeReligion(frase)){
         mundo->buscarPorReligion(frase);
         cout << "\n\nPublicacion exitosa\n\n";
     }else cout << "\nNo existe esa religion\n" << endl;
-        
 }
 
 

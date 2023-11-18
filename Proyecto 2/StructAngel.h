@@ -1,5 +1,6 @@
 #include <iostream>
 #include "StructHumano.h"
+#include "FileManager.h"
 
 #ifndef STRUCTANGEL_H
 #define STRUCTANGEL_H
@@ -9,6 +10,7 @@ struct Angel{
     int version;
     int generacion;
     StructHumano *h;
+    logsAngeles *logsInstance;
 
     Angel(int _version, int _generacion, StructHumano *_h){
         nombre = selectRandomNombre();
@@ -35,6 +37,10 @@ struct Angel{
         std::string nombres[10] = {"Miguel", "Nuriel", "Aniel", "Rafael", "Gabriel", "Shamsiel", "Raguel", "Uriel", "Azrael", "Sariel"};
         int random = rand() % 10;
         return nombres[random];
+    }
+
+    void logInit(){
+        logsInstance = new logsAngeles();
     }
 
 

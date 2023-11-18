@@ -123,24 +123,24 @@ struct ArbolTernario{
             if (nodo != nullptr){
                 if(nodo->angel->nombre != "El Dios" && nodo->angel->nombre != "Serafines" && nodo->angel->nombre != "Querubines"  && nodo->angel->nombre != "Tronos" && nodo->angel->h == nullptr){
                     nodo->angel->h = _h;
+                    nodo->angel->logInit();
+                    nodo->angel->logsInstance->logSalvacion(_h->nombre,_h->apellido,_h->pais, _h->cantPecados(), nodo->angel->nombre, nodo->angel->version, nodo->angel->generacion);
                     return;
-                }else{
+                }
+                else{
                     insertarHumano(_h,nodo->izq);
                     insertarHumano(_h,nodo->cen);
                     insertarHumano(_h,nodo->der);
                 }
             }
-        }else return;
+        }else{
+            return;
+        }
     }
 
     NodoAngel * getRaiz(){
         return raiz;
     }
-
-
-
-
-
 };
 
 #endif // STRUCTARBOL_H
