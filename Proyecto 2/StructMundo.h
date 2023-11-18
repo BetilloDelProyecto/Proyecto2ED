@@ -71,6 +71,22 @@ struct ArbolVida{
         }
     }
 
+    void printLevel(Nodo* node, int level) {
+        if (node == nullptr)
+            return;
+        if (level == 1)
+            std::cout << (*node->humano)->id << " ";
+        else if (level > 1) {
+            printLevel(node->izq, level-1);
+            printLevel(node->der, level-1);
+        }
+    }
+
+    void imprimirUltimoNivel() {
+        int h = altura(raiz);
+        printLevel(raiz, h);
+    }
+
     int altura(Nodo * nodo){
         if(nodo == nullptr)
             return 0;
@@ -163,16 +179,16 @@ struct StructMundo{
 
     void generarPoblacion(int cant){
         int repeticiones = 0;
-        for (int i = cantPoblacion; i < cant+cantPoblacion; i++){
+        for (int i = cantPoblacion; i < cant+cantPoblacion; ){
             int id = numRandom(999999);
             if(!(existeID(id))){
                 poblacion[i] = new StructHumano(id,nombres[numRandom(999)],apellidos[numRandom(14)],paises[numRandom(19)],creencias[numRandom(9)],profesiones[numRandom(19)],getDateTime());
                 poblacion[i]->cantAmigos = numRandom(100);
+                i++;
             }else{
                 repeticiones += 1;
                 cant += 1; 
             }
-            
         }
         cantPoblacion += cant;
         cantPoblacion -= repeticiones;

@@ -32,6 +32,7 @@ def emailSender(_subject , _content, _filepath):
     # smtp.ehlo() # Identifica el servido de correo gmail nuevamente para la conexión encriptada
         smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD) # Inicia sesión en el servidor de correo electrónico
         smtp.send_message(msg) # Envía el correo electrónico
+    print('Correo electronico enviado exitosamente')
 
 
 if __name__ == '__main__':

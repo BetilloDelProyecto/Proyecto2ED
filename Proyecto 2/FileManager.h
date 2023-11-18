@@ -58,7 +58,7 @@ void finLog(){
     std::string path = "DemoniosLogs/logGeneral.txt";
     std::ofstream file(path,std::ios::app);
     if(file.is_open()){
-        file << "------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+        file << "\n";
     }
     file.close();
 }
@@ -67,7 +67,7 @@ void inicioLog(){
     std::string path = "DemoniosLogs/logGeneral.txt";
     std::ofstream file(path,std::ios::app);
     if(file.is_open()){
-        file << "--------------------- " + demonio + "---------------------\n";
+        file << "------------------------------------ " + demonio + " ------------------------------------n";
     }
     file.close();
 }
